@@ -1,4 +1,4 @@
-﻿function numToSimp(n){
+function numToSimp(n){
     var str = "";
     var units=parseInt(n%10);
     var tens=parseInt(n/10);
@@ -33,13 +33,23 @@ function numToTrad(n){
         str=trans.charAt(tens);
     }
     if(tens!=0){
-		if(tens == 1 && units == 0){
-			str+="10";	// Time lúc 10h
-		}else if(tens == 1 && units != 0){
+		if(tens == 1 && units != 0){
 			str+="1";	// > 10h
-		}else if(tens == 2 && units == 0){
-			str+="0"; // Time lúc 20h
 		}
+		if(units == 0){
+			switch(tens){
+				case 1:
+					str+="10";
+					break;
+				case 2:
+				case 3:
+				case 4:
+				case 5:
+					str+="0";
+					break
+			}			
+		}
+		
 		str+="";
     }
     if(units!=0){
@@ -563,10 +573,6 @@ function getMinutes(type,minute){
             }
             for(i=0;i<minute;i++){
                 minutes.push(numToTrad(i));
-				if(minute == 3 || minute == 4){
-					minutes = minutes + "0";
-					console.log(minute);
-				}
             }
             break;
     }
